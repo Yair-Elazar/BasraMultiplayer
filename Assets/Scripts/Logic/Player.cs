@@ -9,7 +9,8 @@ public class Player
     {
         this.clientId = clientId;
     }
-
+    
+    public Action<int , Card> OnCardDealt;
     public void DealCard(Card card)
     {
         for (int i = 0; i < 4; i++)
@@ -17,6 +18,7 @@ public class Player
             if (hand[i] == null)
                 {
                 hand[i] = card;
+                OnCardDealt?.Invoke(i, card);
                 return; 
                 }
         }

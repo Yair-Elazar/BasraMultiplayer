@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-public abstract class Command 
+public abstract class Command : MonoBehaviour
 {
     private static Queue<Command> queue = new();
     private static bool isCommandPlaying = false;

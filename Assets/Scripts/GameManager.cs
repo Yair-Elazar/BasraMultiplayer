@@ -24,7 +24,7 @@ public class GameManager : NetworkBehaviour
         else if (p2 == null)
         {
             p2 = new Player(clientId);
-            StartGame();
+            Invoke(nameof(StartGame), .5f);
         }
         else
         {
@@ -36,6 +36,7 @@ public class GameManager : NetworkBehaviour
     {
         OnStartGame?.Invoke();
         InitDeck();
+        DealInitialHand();
     }
     
     private void InitDeck()
@@ -83,5 +84,11 @@ public class GameManager : NetworkBehaviour
         deck.RemoveAt(0);
         return card;
     }
-    
+
+    public Player GetPlayer(ulong clientId)
+    {
+        if (clientId == p1.clientId) return p1;
+        else if (clientId == p2.clientId) return p2;
+        else throw new InvalidOperationException($"getplayer not found for clientId: {clientId}");
+    }
 }
